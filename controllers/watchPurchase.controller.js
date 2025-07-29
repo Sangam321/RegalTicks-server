@@ -39,8 +39,8 @@ export const createCheckoutSession = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `http://localhost:5173/watch-detail/${watchId}`, // once payment successful redirect to watch progress page
-      cancel_url: `http://localhost:5173/watch-detail/${watchId}`,
+      success_url: `https://localhost:5173/watch-detail/${watchId}`, // once payment successful redirect to watch progress page
+      cancel_url: `https://localhost:5173/watch-detail/${watchId}`,
       metadata: {
         watchId: watchId,
         userId: userId,
