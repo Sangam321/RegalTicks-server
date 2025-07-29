@@ -14,10 +14,9 @@ import upload from "../utils/multer.js";
 
 const router = express.Router();
 
-// Enhanced auth rate limiter
 const authLimiter = rateLimit({
     windowMs: 3 * 60 * 1000, // 3 minutes
-    max: 5, // Limit each IP to 5 login attempts per window
+    max: 5, // Limit each IP to 5 login attempts 
     handler: (req, res) => {
         const resetTime = req.rateLimit.resetTime;
         const retryAfterSec = Math.ceil((resetTime - Date.now()) / 1000);
@@ -25,13 +24,13 @@ const authLimiter = rateLimit({
         return res.status(429).json({
             success: false,
             message: "Too many login attempts",
-            retryAfter: retryAfterSec, // Seconds until next try
-            resetTime: resetTime // Exact reset timestamp
+            retryAfter: retryAfterSec,
+            resetTime: resetTime
         });
     },
-    standardHeaders: true, // Enable RateLimit headers
+    standardHeaders: true,
     legacyHeaders: false,
-    skipSuccessfulRequests: true // Only count failed attempts
+    skipSuccessfulRequests: true
 });
 
 // OTP-specific rate limiter (more strict than general auth)
@@ -49,7 +48,7 @@ const otpLimiter = rateLimit({
 // Routes
 router.route("/register").post(authLimiter, verifyRecaptcha, register);
 router.route("/login").post(authLimiter, login);
-router.route("/verify-otp").post(otpLimiter, verifyOTP); // New OTP verification route
+router.route("/verify-otp").post(otpLimiter, verifyOTP);
 
 // Protected routes
 router.route("/logout").get(logout);
