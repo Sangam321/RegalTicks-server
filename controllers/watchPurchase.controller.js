@@ -33,7 +33,7 @@ export const createCheckoutSession = async (req, res) => {
               name: watch.watchTitle,
               images: [watch.watchThumbnail],
             },
-            unit_amount: watch.watchPrice * 100, // Amount in paise (lowest denomination)
+            unit_amount: watch.watchPrice * 100,
           },
           quantity: 1,
         },
