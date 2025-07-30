@@ -179,3 +179,5 @@ export const getAllPurchasedWatch = async (_, res) => {
     console.log(error);
   }
 };
+
+
